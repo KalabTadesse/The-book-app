@@ -8,7 +8,8 @@
 import SwiftUI
 import SwiftData
 
-struct ContentView: View {
+struct LibraryView: View {
+    
     @Environment(\.modelContext) private var modelContext
     @Query private var books: [Book]
 
@@ -20,7 +21,7 @@ struct ContentView: View {
         }
 
         var body: some View {
-            NavigationView {
+            NavigationStack {
                 VStack {
                     TextField("Search books...", text: $searchText)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -52,6 +53,7 @@ struct ContentView: View {
                 }
             }
         }
+    
 
         private var filteredBooks: [Book] {
             if searchText.isEmpty {
@@ -79,23 +81,23 @@ struct ContentView: View {
         let context = container.mainContext
 
         //test data from chat ------------------------------------------//
-        let fakeAuthor1 = Author(name: "J.K. Rowling")
-        let fakeAuthor2 = Author(name: "George Orwell")
-        let fakeGenre1 = Genre(name: "Fantasy")
-        let fakeGenre2 = Genre(name: "Dystopian")
-
-        let fakeBooks = [
-            Book(title: "Harry Potter and the Sorcerer's Stone", author: fakeAuthor1, genre: fakeGenre1, publicationYear: 1997),
-            Book(title: "1984", author: fakeAuthor2, genre: fakeGenre2, publicationYear: 1949),
-            Book(title: "Animal Farm", author: fakeAuthor2, genre: fakeGenre2, publicationYear: 1945)
-        ]
-
-        for book in fakeBooks {
-            context.insert(book)
-        }
+//        let fakeAuthor1 = Author(name: "J.K. Rowling")
+//        let fakeAuthor2 = Author(name: "George Orwell")
+//        let fakeGenre1 = Genre(name: "Fantasy")
+//        let fakeGenre2 = Genre(name: "Dystopian")
+//
+//        let fakeBooks = [
+//            Book(title: "Harry Potter and the Sorcerer's Stone", author: fakeAuthor1, genre: fakeGenre1, publicationYear: 1997),
+//            Book(title: "1984", author: fakeAuthor2, genre: fakeGenre2, publicationYear: 1949),
+//            Book(title: "Animal Farm", author: fakeAuthor2, genre: fakeGenre2, publicationYear: 1945)
+//        ]
+//
+//        for book in fakeBooks {
+//            context.insert(book)
+//        }
         //test data from chat ------------------------------------------//
         
-        return ContentView(modelContext: context)
+        return LibraryView(modelContext: context)
             .modelContainer(container)
     } catch {
         fatalError("Failed to create ModelContainer: \(error)")

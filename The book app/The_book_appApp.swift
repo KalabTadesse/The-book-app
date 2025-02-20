@@ -27,7 +27,7 @@ struct The_book_appApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView(modelContext: sharedModelContainer.mainContext)
+            LibraryView(modelContext: sharedModelContainer.mainContext)
         }
         .modelContainer(sharedModelContainer)
     }

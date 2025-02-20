@@ -6,8 +6,19 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXContainerItemProxy section */
+		27DAC6DE2D673A8200CE6340 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 273E0DB02D628A2000E6DFBE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 273E0DB72D628A2000E6DFBE;
+			remoteInfo = "The book app";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		273E0DB82D628A2000E6DFBE /* The book app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "The book app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		27DAC6DA2D673A8200CE6340 /* The book appTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "The book appTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -16,10 +27,22 @@
 			path = "The book app";
 			sourceTree = "<group>";
 		};
+		27DAC6DB2D673A8200CE6340 /* The book appTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "The book appTests";
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		273E0DB52D628A2000E6DFBE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		27DAC6D72D673A8200CE6340 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -33,6 +56,7 @@
 			isa = PBXGroup;
 			children = (
 				273E0DBA2D628A2000E6DFBE /* The book app */,
+				27DAC6DB2D673A8200CE6340 /* The book appTests */,
 				273E0DB92D628A2000E6DFBE /* Products */,
 			);
 			sourceTree = "<group>";
@@ -41,6 +65,7 @@
 			isa = PBXGroup;
 			children = (
 				273E0DB82D628A2000E6DFBE /* The book app.app */,
+				27DAC6DA2D673A8200CE6340 /* The book appTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -70,6 +95,29 @@
 			productReference = 273E0DB82D628A2000E6DFBE /* The book app.app */;
 			productType = "com.apple.product-type.application";
 		};
+		27DAC6D92D673A8200CE6340 /* The book appTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 27DAC6E02D673A8200CE6340 /* Build configuration list for PBXNativeTarget "The book appTests" */;
+			buildPhases = (
+				27DAC6D62D673A8200CE6340 /* Sources */,
+				27DAC6D72D673A8200CE6340 /* Frameworks */,
+				27DAC6D82D673A8200CE6340 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				27DAC6DF2D673A8200CE6340 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				27DAC6DB2D673A8200CE6340 /* The book appTests */,
+			);
+			name = "The book appTests";
+			packageProductDependencies = (
+			);
+			productName = "The book appTests";
+			productReference = 27DAC6DA2D673A8200CE6340 /* The book appTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -82,6 +130,10 @@
 				TargetAttributes = {
 					273E0DB72D628A2000E6DFBE = {
 						CreatedOnToolsVersion = 16.2;
+					};
+					27DAC6D92D673A8200CE6340 = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = 273E0DB72D628A2000E6DFBE;
 					};
 				};
 			};
@@ -100,12 +152,20 @@
 			projectRoot = "";
 			targets = (
 				273E0DB72D628A2000E6DFBE /* The book app */,
+				27DAC6D92D673A8200CE6340 /* The book appTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		273E0DB62D628A2000E6DFBE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		27DAC6D82D673A8200CE6340 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -122,7 +182,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		27DAC6D62D673A8200CE6340 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		27DAC6DF2D673A8200CE6340 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 273E0DB72D628A2000E6DFBE /* The book app */;
+			targetProxy = 27DAC6DE2D673A8200CE6340 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		273E0DC62D628A2300E6DFBE /* Debug */ = {
@@ -302,6 +377,42 @@
 			};
 			name = Release;
 		};
+		27DAC6E12D673A8200CE6340 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = XJPMA4R7P7;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "ju.dmp2025.project.kalab.The-book-appTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/The book app.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/The book app";
+			};
+			name = Debug;
+		};
+		27DAC6E22D673A8200CE6340 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = XJPMA4R7P7;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "ju.dmp2025.project.kalab.The-book-appTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/The book app.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/The book app";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -319,6 +430,15 @@
 			buildConfigurations = (
 				273E0DC92D628A2300E6DFBE /* Debug */,
 				273E0DCA2D628A2300E6DFBE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		27DAC6E02D673A8200CE6340 /* Build configuration list for PBXNativeTarget "The book appTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				27DAC6E12D673A8200CE6340 /* Debug */,
+				27DAC6E22D673A8200CE6340 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

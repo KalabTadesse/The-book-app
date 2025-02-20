@@ -9,7 +9,7 @@ import Foundation
 import SwiftData
 
 @Model
-class Book {
+final class Book {
     @Attribute(.unique) private(set) var id = UUID()
     var title: String
     var author: Author?

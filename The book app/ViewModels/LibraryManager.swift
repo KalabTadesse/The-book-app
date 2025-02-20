@@ -18,7 +18,6 @@ class LibraryManager {
     func addBook(title: String, author: Author?, genre: Genre?, publicationYear: Int) {
         let newBook = Book(title: title, author: author, genre: genre, publicationYear: publicationYear)
         context.insert(newBook)
-        try? context.save()
     }
 
     func fetchBooks() -> [Book] {
@@ -28,11 +27,9 @@ class LibraryManager {
 
     func updateBook(book: Book, newTitle: String) {
         book.title = newTitle
-        try? context.save()
     }
 
     func deleteBook(book: Book) {
         context.delete(book)
-        try? context.save()
     }
 }

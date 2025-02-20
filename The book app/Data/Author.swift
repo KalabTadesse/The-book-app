@@ -9,7 +9,7 @@ import Foundation
 import SwiftData
 
 @Model
-class Author {
+final class Author {
     var name: String
     var books: [Book]?
 
