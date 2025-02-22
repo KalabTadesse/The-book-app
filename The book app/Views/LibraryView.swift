@@ -14,7 +14,7 @@ struct LibraryView: View {
     @Query private var books: [Book]
 
     private var libraryManager: LibraryManager
-        @State private var searchText: String = ""
+    @State private var searchText: String = ""
 
         init(modelContext: ModelContext) {
             self.libraryManager = LibraryManager(context: modelContext)
@@ -23,9 +23,19 @@ struct LibraryView: View {
         var body: some View {
             NavigationStack {
                 VStack {
-                    TextField("Search books...", text: $searchText)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .padding()
+                    HStack {
+                        TextField("Search books...", text: $searchText)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .padding(.horizontal)
+                    
+                        if !searchText.isEmpty {
+                            Button(action: clearSearch) {
+                                Image(systemName: "xmark.circle.fill")
+                                    .foregroundColor(.gray)
+                            }
+                            .padding(.trailing, 8)
+                        }
+                    }
                     
                     List {
                         ForEach(filteredBooks) { book in
@@ -44,17 +54,9 @@ struct LibraryView: View {
                     }
                 }
                 .navigationTitle("Library")
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        Button(action: clearSearch) {
-                            Image(systemName: "xmark.circle.fill")
-                        }
-                    }
-                }
             }
         }
     
-
         private var filteredBooks: [Book] {
             if searchText.isEmpty {
                 return books
@@ -79,8 +81,15 @@ struct LibraryView: View {
     do {
         let container = try ModelContainer(for: Book.self, Author.self, Genre.self)
         let context = container.mainContext
+        
+        return LibraryView(modelContext: context)
+            .modelContainer(container)
+    } catch {
+        fatalError("Failed to create ModelContainer: \(error)")
+    }
+}
 
-        //test data from chat ------------------------------------------//
+//test data from chat ------------------------------------------//
 //        let fakeAuthor1 = Author(name: "J.K. Rowling")
 //        let fakeAuthor2 = Author(name: "George Orwell")
 //        let fakeGenre1 = Genre(name: "Fantasy")
@@ -95,11 +104,4 @@ struct LibraryView: View {
 //        for book in fakeBooks {
 //            context.insert(book)
 //        }
-        //test data from chat ------------------------------------------//
-        
-        return LibraryView(modelContext: context)
-            .modelContainer(container)
-    } catch {
-        fatalError("Failed to create ModelContainer: \(error)")
-    }
-}
+//test data from chat ------------------------------------------//
