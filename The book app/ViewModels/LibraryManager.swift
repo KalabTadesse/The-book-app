@@ -15,7 +15,7 @@ class LibraryManager {
         self.context = context
     }
 
-    func addBook(title: String, author: Author?, genre: Genre?, publicationYear: Int) {
+    func addBook(title: String, author: Author?, genre: Genre?, publicationYear: String) {
         let newBook = Book(title: title, author: author, genre: genre, publicationYear: publicationYear)
         context.insert(newBook)
     }

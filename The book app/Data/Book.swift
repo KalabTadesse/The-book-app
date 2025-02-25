@@ -14,13 +14,15 @@ final class Book {
     var title: String
     var author: Author?
     var genre: Genre?
-    var publicationYear: Int
+    var publicationYear: String
+    var coverURL: String?
 
-    init(title: String, author: Author?, genre: Genre?, publicationYear: Int) {
+    init(title: String, author: Author?, genre: Genre?, publicationYear: String, coverURL: String? = nil) {
         self.id = UUID() 
         self.title = title
         self.author = author
         self.genre = genre
         self.publicationYear = publicationYear
+        self.coverURL = coverURL
     }
 }

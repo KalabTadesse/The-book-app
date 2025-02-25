@@ -96,9 +96,9 @@ struct LibraryView: View {
 //        let fakeGenre2 = Genre(name: "Dystopian")
 //
 //        let fakeBooks = [
-//            Book(title: "Harry Potter and the Sorcerer's Stone", author: fakeAuthor1, genre: fakeGenre1, publicationYear: 1997),
-//            Book(title: "1984", author: fakeAuthor2, genre: fakeGenre2, publicationYear: 1949),
-//            Book(title: "Animal Farm", author: fakeAuthor2, genre: fakeGenre2, publicationYear: 1945)
+//            Book(title: "Harry Potter and the Sorcerer's Stone", author: fakeAuthor1, genre: fakeGenre1, publicationYear: "1997"),
+//            Book(title: "1984", author: fakeAuthor2, genre: fakeGenre2, publicationYear: "1949"),
+//            Book(title: "Animal Farm", author: fakeAuthor2, genre: fakeGenre2, publicationYear: "1945")
 //        ]
 //
 //        for book in fakeBooks {

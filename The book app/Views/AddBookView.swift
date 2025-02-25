@@ -11,13 +11,12 @@ struct AddBookView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var books: [Book]
 
-    @StateObject private var googleBooksAPI = GoogleBooksAPI()  // ✅ Google Books API Manager
+    @StateObject private var googleBooksService = GoogleBooksService()
     @State private var searchText: String = ""
 
     var body: some View {
         NavigationStack {
             VStack {
-                // ✅ Search Bar with Clear Button
                 HStack {
                     TextField("Search Google Books...", text: $searchText, onCommit: searchBooks)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -31,36 +30,24 @@ struct AddBookView: View {
                         .padding(.trailing, 8)
                     }
                 }
-                
-                List {
-                    // ✅ Display Google Books Search Results
-                    ForEach(googleBooksAPI.searchResults) { book in
-                        VStack(alignment: .leading) {
-                            Text(book.title)
-                                .font(.headline)
-                            Text("Author: \(book.author?.name ?? "Unknown")")
-                                .font(.subheadline)
-                            Text("Genre: \(book.genre?.name ?? "Unknown")")
-                                .font(.subheadline)
-                            Text("Published: \(book.publicationYear)")
-                                .font(.subheadline)
-                        }
-                        .onTapGesture {
-                            addBookToLibrary(book)
-                        }
-                    }
-                }
+                List(googleBooksService.books, id: \.id) { book in
+                                   Text(book.title)
+                                       .onTapGesture {
+                                           addBookToLibrary(book)
+                                       }
+                               }
+
             }
             .navigationTitle("Add Book")
         }
     }
     
-    // ✅ Search on Commit
     private func searchBooks() {
-        googleBooksAPI.searchBooks(query: searchText)
+        Task {
+            await googleBooksService.searchBooks(query: searchText)
+        }
     }
 
-    // ✅ Add Book to SwiftData
     private func addBookToLibrary(_ book: Book) {
         modelContext.insert(book)
         try? modelContext.save()
@@ -68,11 +55,10 @@ struct AddBookView: View {
     
     private func clearSearch() {
         searchText = ""
-        googleBooksAPI.searchResults = []  // ✅ Clear search results
     }
 }
 
 #Preview {
     AddBookView()
-        .modelContainer(for: Book.self, inMemory: true)
+         .modelContainer(for: [Book.self, Author.self, Genre.self], inMemory: true)
 }

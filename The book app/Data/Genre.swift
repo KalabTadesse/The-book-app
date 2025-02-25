@@ -12,7 +12,6 @@ import SwiftData
 final class Genre {
     var name: String
     var books: [Book]?
-
     init(name: String) {
         self.name = name
     }
