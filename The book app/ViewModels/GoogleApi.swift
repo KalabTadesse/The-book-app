@@ -8,7 +8,7 @@
 import Foundation
 import SwiftData
 
-class GoogleBooksService : ObservableObject{
+class GoogleBooksService : Observable{
     
     @Published var books: [Book] = []
     

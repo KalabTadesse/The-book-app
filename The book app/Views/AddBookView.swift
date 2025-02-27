@@ -11,7 +11,7 @@ struct AddBookView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var books: [Book]
 
-    @StateObject private var googleBooksService = GoogleBooksService()
+    @State private var googleBooksService = GoogleBooksService()
     @State private var searchText: String = ""
 
     var body: some View {

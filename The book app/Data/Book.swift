@@ -7,9 +7,10 @@
 
 import Foundation
 import SwiftData
+import Observation
 
 @Model
-final class Book {
+final class Book{
     @Attribute(.unique) var id = UUID()
     var title: String
     var author: Author?
