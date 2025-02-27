@@ -27,9 +27,12 @@ struct The_book_appApp: App {
 
     var body: some Scene {
         WindowGroup {
-            LibraryView(modelContext: sharedModelContainer.mainContext)
+            VStack {
+                Text("Hello")
+            }
+            /*LibraryView(modelContext: sharedModelContainer.mainContext)
+                .modelContainer(sharedModelContainer)*/
         }
-        .modelContainer(sharedModelContainer)
     }
 }
 

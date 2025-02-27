@@ -78,16 +78,33 @@ struct LibraryView: View {
     }
 
 #Preview {
-    do {
-        let container = try ModelContainer(for: Book.self, Author.self, Genre.self)
-        let context = container.mainContext
-        
-        return LibraryView(modelContext: context)
-            .modelContainer(container)
-    } catch {
-        fatalError("Failed to create ModelContainer: \(error)")
-    }
+    var sharedModelContainer: ModelContainer = {
+        let schema = Schema([
+            Book.self,
+            Author.self,
+            Genre.self
+        ])
+        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: true)
+
+        do {
+            return try ModelContainer(for: schema, configurations: [modelConfiguration])
+        } catch {
+            fatalError("Could not create ModelContainer: kalab \(error)")
+        }
+    }()
+    
+    LibraryView(modelContext: sharedModelContainer.mainContext)
 }
+//do {
+//    let container = try ModelContainer(for: Book.self, Author.self, Genre.self)
+//    let context = container.mainContext
+//
+//    return LibraryView(modelContext: context)
+//        .modelContainer(container)
+//} catch {
+//    fatalError("Failed to create ModelContainer: \(error)")
+//}
+//}
 
 //test data from chat ------------------------------------------//
 //        let fakeAuthor1 = Author(name: "J.K. Rowling")
@@ -105,3 +122,4 @@ struct LibraryView: View {
 //            context.insert(book)
 //        }
 //test data from chat ------------------------------------------//
+

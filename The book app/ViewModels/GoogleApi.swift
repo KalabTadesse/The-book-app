@@ -19,7 +19,6 @@ class GoogleBooksService : ObservableObject{
             }
             do {
                 let fetchedBooks = try await fetchBooks(from: url)
-                // Update the published property on the main thread.
                 await MainActor.run {
                     self.books = fetchedBooks
                 }

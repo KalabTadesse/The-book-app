@@ -10,7 +10,7 @@ import SwiftData
 
 @Model
 final class Book {
-    @Attribute(.unique) private(set) var id = UUID()
+    @Attribute(.unique) var id = UUID()
     var title: String
     var author: Author?
     var genre: Genre?
