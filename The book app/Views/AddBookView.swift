@@ -18,9 +18,10 @@ struct AddBookView: View {
         NavigationStack {
             VStack {
                 HStack {
-                    TextField("Search Google Books...", text: $searchText, onCommit: searchBooks)
+                    TextField("Search Google Books...", text: $searchText)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .padding(.horizontal)
+                        .onSubmit(searchBooks)
                     
                     if !searchText.isEmpty {
                         Button(action: clearSearch) {
@@ -39,18 +40,19 @@ struct AddBookView: View {
 
             }
             .navigationTitle("Add Book")
+            
         }
     }
     
     private func searchBooks() {
         Task {
             await googleBooksService.searchBooks(query: searchText)
+            print(books.map { $0.title })
         }
     }
 
     private func addBookToLibrary(_ book: Book) {
         modelContext.insert(book)
-        try? modelContext.save()
     }
     
     private func clearSearch() {

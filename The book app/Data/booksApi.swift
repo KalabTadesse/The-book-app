@@ -7,16 +7,16 @@
 import Foundation
 import SwiftData
 
-struct GoogleBookResponse: Codable {
+struct GoogleBookResponse:Decodable {
     let items: [GoogleBook]?
 }
 
-struct GoogleBook: Codable {
+struct GoogleBook: Decodable {
     let id: String
     let volumeInfo: VolumeInfo
 }
 
-struct VolumeInfo: Codable {
+struct VolumeInfo: Decodable {
     let title: String?
     let authors: [String]?
     let publishedDate: String?
@@ -24,7 +24,7 @@ struct VolumeInfo: Codable {
     let imageLinks: ImageLinks?
 }
 
-struct ImageLinks: Codable {
+struct ImageLinks: Decodable {
     let smallThumbnail: String?
     let thumbnail: String?
 }

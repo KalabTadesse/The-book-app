@@ -7,10 +7,12 @@
 
 import Foundation
 import SwiftData
+import Observation
 
-class GoogleBooksService : Observable{
+@Observable
+class GoogleBooksService {
     
-    @Published var books: [Book] = []
+    var books: [Book] = []
     
     func searchBooks(query: String) async {
             guard let url = URL(string: "https://www.googleapis.com/books/v1/volumes?q=\(query)") else {
