@@ -11,7 +11,7 @@ import SwiftData
 @Model
 final class Author {
     var name: String
-    var books: [Book] = []
+    @Transient var books: [Book] = []
 
     init(name: String) {
         self.name = name

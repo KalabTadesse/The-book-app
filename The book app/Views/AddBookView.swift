@@ -32,11 +32,12 @@ struct AddBookView: View {
                     }
                 }
                 List(googleBooksService.books, id: \.id) { book in
-                                   Text(book.title)
-                                       .onTapGesture {
-                                           addBookToLibrary(book)
-                                       }
-                               }
+                    Button(action: {
+                        addBookToLibrary(book)
+                    }) {
+                        Text(book.title)
+                    }
+                }
 
             }
             .navigationTitle("Add Book")
@@ -47,12 +48,12 @@ struct AddBookView: View {
     private func searchBooks() {
         Task {
             await googleBooksService.searchBooks(query: searchText)
-            print(books.map { $0.title })
         }
     }
 
     private func addBookToLibrary(_ book: Book) {
         modelContext.insert(book)
+        print(books.map { $0.title })
     }
     
     private func clearSearch() {

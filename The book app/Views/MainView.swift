@@ -6,17 +6,18 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct MainView: View {
     var body: some View {
           TabView {
               AddBookView()
                   .tabItem {
-                      Label("Cat", systemImage: "cat.fill")
+                      Label("Add book", systemImage: "plus.square.fill")
                   }
               LibraryView()
                   .tabItem {
-                      Label("Dog", systemImage: "dog.fill")
+                      Label("Libbrary", systemImage: "books.vertical.fill")
                   }
           }
       }

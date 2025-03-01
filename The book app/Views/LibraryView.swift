@@ -76,7 +76,7 @@ struct LibraryView: View {
     }
 
 #Preview {
-    var sharedModelContainer: ModelContainer = {
+    let sharedModelContainer: ModelContainer = {
         let schema = Schema([
             Book.self,
             Author.self,
