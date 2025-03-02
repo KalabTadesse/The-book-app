@@ -46,6 +46,8 @@ struct LibraryView: View {
                                     .font(.subheadline)
                                 Text("Published: \(book.publicationYear)")
                                     .font(.subheadline)
+                                Text("Bookstatus: \(book.status)")
+                                    .font(.subheadline)
                             }
                         }
                         .onDelete(perform: deleteBooks)
