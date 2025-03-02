@@ -16,21 +16,14 @@ final class Book{
     var author: Author?
     var genre: Genre?
     var publicationYear: String
-    var status: BookStatus
     var coverURL: String?
-    enum BookStatus: String, Codable {
-            case currentlyReading = "Currently Reading"
-            case wantToRead = "Want to Read"
-            case alreadyRead = "Already Read"
-        }
-    
-    init(title: String, author: Author?, genre: Genre?, publicationYear: String, status: BookStatus,coverURL: String? = nil) {
-        self.id = UUID()
+
+    init(title: String, author: Author?, genre: Genre?, publicationYear: String, coverURL: String? = nil) {
+        self.id = UUID() 
         self.title = title
         self.author = author
         self.genre = genre
         self.publicationYear = publicationYear
-        self.status = status
         self.coverURL = coverURL
     }
 }

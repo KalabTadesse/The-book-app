@@ -13,6 +13,7 @@ struct LibraryView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var books: [Book]
     @State private var searchText: String = ""
+    @State private var viewModel: LibraryViewModel
 
     private var libraryManager: LibraryManager{
         LibraryManager(context: modelContext)
@@ -27,7 +28,7 @@ struct LibraryView: View {
                             .padding(.horizontal)
                     
                         if !searchText.isEmpty {
-                            Button(action: clearSearch) {
+                            Button(action: LibraryViewModel.clearSearch) {
                                 Image(systemName: "xmark.circle.fill")
                                     .foregroundColor(.gray)
                             }
@@ -36,7 +37,7 @@ struct LibraryView: View {
                     }
                     
                     List {
-                        ForEach(filteredBooks) { book in
+                        ForEach(LibraryViewModel.filteredBooks) { book in
                             VStack(alignment: .leading) {
                                 Text(book.title)
                                     .font(.headline)
@@ -46,35 +47,16 @@ struct LibraryView: View {
                                     .font(.subheadline)
                                 Text("Published: \(book.publicationYear)")
                                     .font(.subheadline)
-                                Text("Bookstatus: \(book.status)")
-                                    .font(.subheadline)
                             }
                         }
-                        .onDelete(perform: deleteBooks)
+                        .onDelete(perform: LibraryViewModel.deleteBooks)
                     }
                 }
                 .navigationTitle("Library")
             }
         }
     
-        private var filteredBooks: [Book] {
-            if searchText.isEmpty {
-                return books
-            } else {
-                return books.filter { $0.title.localizedCaseInsensitiveContains(searchText) }
-            }
-        }
-
-        private func clearSearch() {
-            searchText = ""
-        }
-
-        private func deleteBooks(at offsets: IndexSet) {
-            for index in offsets {
-                let bookToDelete = books[index]
-                libraryManager.deleteBook(book: bookToDelete)
-            }
-        }
+ 
     }
 
 #Preview {
