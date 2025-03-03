@@ -14,10 +14,15 @@ struct LibraryView: View {
     @Query private var books: [Book]
     @State private var searchText: String = ""
     @State private var viewModel: LibraryViewModel
+    
+//    chat https://chatgpt.com/c/67c5b808-6394-8010-9e68-e0bd5667b2cb
+    init(context: ModelContext) {
+            _viewModel = State(initialValue: LibraryViewModel(context: context))
+        }
 
-    private var libraryManager: LibraryManager{
-        LibraryManager(context: modelContext)
-    }
+//    private var libraryManager: LibraryManager{
+//        LibraryManager(context: modelContext)
+//    }
     
         var body: some View {
             NavigationStack {
@@ -28,7 +33,7 @@ struct LibraryView: View {
                             .padding(.horizontal)
                     
                         if !searchText.isEmpty {
-                            Button(action: LibraryViewModel.clearSearch) {
+                            Button(action: viewModel.clearSearch) {
                                 Image(systemName: "xmark.circle.fill")
                                     .foregroundColor(.gray)
                             }
@@ -37,7 +42,7 @@ struct LibraryView: View {
                     }
                     
                     List {
-                        ForEach(LibraryViewModel.filteredBooks) { book in
+                        ForEach(viewModel.filteredBooks) { book in
                             VStack(alignment: .leading) {
                                 Text(book.title)
                                     .font(.headline)
@@ -49,7 +54,7 @@ struct LibraryView: View {
                                     .font(.subheadline)
                             }
                         }
-                        .onDelete(perform: LibraryViewModel.deleteBooks)
+                        .onDelete(perform: viewModel.deleteBooks)
                     }
                 }
                 .navigationTitle("Library")
@@ -92,8 +97,11 @@ struct LibraryView: View {
         }
     }()
     
-   LibraryView()
-        .modelContainer(sharedModelContainer)
+//   LibraryView()
+//        .modelContainer(sharedModelContainer)
+        
+    LibraryView(context: sharedModelContainer.mainContext)
+           .modelContainer(sharedModelContainer)
 }
 
 
