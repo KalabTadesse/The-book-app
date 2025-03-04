@@ -21,13 +21,13 @@ struct The_book_appApp: App {
         do {
             return try ModelContainer(for: schema, configurations: [modelConfiguration])
         } catch {
-            fatalError("Could not create ModelContainer: kalab \(error)")
+            fatalError("Could not create ModelContainer: \(error)")
         }
     }()
 
     var body: some Scene {
         WindowGroup {
-                MainView()
+            MainView(context: sharedModelContainer.mainContext)
         }
         .modelContainer(sharedModelContainer)
     }
