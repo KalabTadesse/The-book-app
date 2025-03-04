@@ -12,7 +12,7 @@ struct LibraryView: View {
     
     @Environment(\.modelContext) private var modelContext
     @Query private var books: [Book]
-    @State private var searchText: String = ""
+    
     @State private var viewModel: LibraryViewModel
     
 //    chat https://chatgpt.com/c/67c5b808-6394-8010-9e68-e0bd5667b2cb
@@ -28,11 +28,11 @@ struct LibraryView: View {
             NavigationStack {
                 VStack {
                     HStack {
-                        TextField("Search books...", text: $searchText)
+                        TextField("Search books...", text: $viewModel.searchText)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                             .padding(.horizontal)
                     
-                        if !searchText.isEmpty {
+                        if !viewModel.searchText.isEmpty {
                             Button(action: viewModel.clearSearch) {
                                 Image(systemName: "xmark.circle.fill")
                                     .foregroundColor(.gray)

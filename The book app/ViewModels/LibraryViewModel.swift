@@ -44,5 +44,6 @@ class LibraryViewModel{
             let bookToDelete = books[index]
             libraryManager.deleteBook(book: bookToDelete)
         }
+        fetchBooks()
     }
 }
