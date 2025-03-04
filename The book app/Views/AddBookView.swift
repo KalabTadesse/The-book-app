@@ -9,6 +9,7 @@ import SwiftData
 
 struct AddBookView: View {
     @Environment(\.modelContext) private var modelContext
+    @Bindable var libraryViewModel : LibraryViewModel
     @Query private var books: [Book]
 
     @State private var googleBooksService = GoogleBooksService()
@@ -53,6 +54,12 @@ struct AddBookView: View {
 
     private func addBookToLibrary(_ book: Book) {
         modelContext.insert(book)
+        do {
+            try modelContext.save()  // ✅ Ensure the change is saved
+            libraryViewModel.fetchBooks()   // ✅ Trigger update in LibraryViewModel
+        } catch {
+            print("Failed to save book: \(error.localizedDescription)")
+        }
         print(books.map { $0.title })
     }
     
@@ -61,7 +68,29 @@ struct AddBookView: View {
     }
 }
 
+//#Preview {
+//    AddBookView()
+//         .modelContainer(for: [Book.self, Author.self, Genre.self], inMemory: true)
+//}
 #Preview {
-    AddBookView()
-         .modelContainer(for: [Book.self, Author.self, Genre.self], inMemory: true)
+    let sharedModelContainer: ModelContainer = {
+        let schema = Schema([
+            Book.self,
+            Author.self,
+            Genre.self
+        ])
+        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: true)
+
+        do {
+            let container = try ModelContainer(for: schema, configurations: [modelConfiguration])
+            return container  // ✅ Correctly return the container
+        } catch {
+            fatalError("Could not create ModelContainer: \(error)")
+        }
+    }()
+
+    let viewModel = LibraryViewModel(context: sharedModelContainer.mainContext)  // ✅ Create ViewModel
+
+    return AddBookView(libraryViewModel: viewModel)  // ✅ Return the View
+        .modelContainer(sharedModelContainer)  // ✅ Attach modelContainer correctly
 }

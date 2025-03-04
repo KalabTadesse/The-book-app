@@ -18,7 +18,7 @@ struct MainView: View {
 
     var body: some View {
         TabView {
-            AddBookView()
+            AddBookView(libraryViewModel: libraryViewModel)
                 .tabItem {
                     Label("Add book", systemImage: "plus.square.fill")
                 }
