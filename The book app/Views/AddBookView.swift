@@ -14,6 +14,7 @@ struct AddBookView: View {
 
     @State private var googleBooksService = GoogleBooksService()
     @State private var searchText: String = ""
+    @State private var selectedReadingStatus: ReadingStatus = .wantToRead
 
     var body: some View {
         NavigationStack {
@@ -32,6 +33,13 @@ struct AddBookView: View {
                         .padding(.trailing, 8)
                     }
                 }
+                
+                Picker("Reading Status", selection: $selectedReadingStatus) {
+                    ForEach(ReadingStatus.allCases, id: \.self) { status in
+                        Text(status.rawValue).tag(status)
+                    }
+                }
+                
                 List(googleBooksService.books, id: \.id) { book in
                     Button(action: {
                         addBookToLibrary(book)
@@ -55,8 +63,8 @@ struct AddBookView: View {
     private func addBookToLibrary(_ book: Book) {
         modelContext.insert(book)
         do {
-            try modelContext.save()  // ✅ Ensure the change is saved
-            libraryViewModel.fetchBooks()   // ✅ Trigger update in LibraryViewModel
+            try modelContext.save()
+            libraryViewModel.fetchBooks()   
         } catch {
             print("Failed to save book: \(error.localizedDescription)")
         }
@@ -83,14 +91,14 @@ struct AddBookView: View {
 
         do {
             let container = try ModelContainer(for: schema, configurations: [modelConfiguration])
-            return container  // ✅ Correctly return the container
+            return container
         } catch {
             fatalError("Could not create ModelContainer: \(error)")
         }
     }()
 
-    let viewModel = LibraryViewModel(context: sharedModelContainer.mainContext)  // ✅ Create ViewModel
+    let viewModel = LibraryViewModel(context: sharedModelContainer.mainContext)
 
-    return AddBookView(libraryViewModel: viewModel)  // ✅ Return the View
-        .modelContainer(sharedModelContainer)  // ✅ Attach modelContainer correctly
+    return AddBookView(libraryViewModel: viewModel)
+        .modelContainer(sharedModelContainer)  
 }

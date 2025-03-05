@@ -39,6 +39,17 @@ struct LibraryView: View {
                                 .font(.subheadline)
                             Text("Published: \(book.publicationYear)")
                                 .font(.subheadline)
+                            Picker("Reading Status", selection: Binding(
+                                get: { book.readingStatus },
+                                set: { newStatus in
+                                    viewModel.updateReadingStatus(for: book, to: newStatus)
+                                        }
+                            )) {
+                                ForEach(ReadingStatus.allCases, id: \.self) { status in
+                                    Text(status.rawValue).tag(status)
+                                }
+                            }
+                            .pickerStyle(MenuPickerStyle())
                         }
                     }
                     .onDelete(perform: viewModel.deleteBooks)

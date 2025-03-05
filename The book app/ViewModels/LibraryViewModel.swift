@@ -46,4 +46,13 @@ class LibraryViewModel{
         }
         fetchBooks()
     }
+    func updateReadingStatus(for book: Book, to newStatus: ReadingStatus) {
+            book.readingStatus = newStatus
+            do {
+                try modelContext.save()
+                fetchBooks()
+            } catch {
+                print("Failed to update reading status: \(error.localizedDescription)")
+            }
+        }
 }
