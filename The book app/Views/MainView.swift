@@ -11,14 +11,18 @@ import SwiftData
 struct MainView: View {
     @Environment(\.modelContext) private var modelContext
     @State private var libraryViewModel: LibraryViewModel
+    @State private var addBookViewModel: AddBookViewModel
 
+    
     init(context: ModelContext) {
-        _libraryViewModel = State(initialValue: LibraryViewModel(context: context))
-    }
+          let libraryVM = LibraryViewModel(context: context)
+          _libraryViewModel = State(initialValue: libraryVM)
+          _addBookViewModel = State(initialValue: AddBookViewModel(modelContext: context, libraryViewModel: libraryVM))
+      }
 
     var body: some View {
         TabView {
-            AddBookView(libraryViewModel: libraryViewModel)
+            AddBookView(viewModel: addBookViewModel)
                 .tabItem {
                     Label("Add book", systemImage: "plus.square.fill")
                 }
