@@ -10,6 +10,9 @@ import SwiftData
 
 struct AddBookView: View {
     @Bindable var viewModel: AddBookViewModel
+    @State private var selectedBook: Book?
+    @State private var selectedReadingStatus: ReadingStatus = .wantToRead
+    @State private var showReadingStatusPicker = false
 
     var body: some View {
         NavigationStack {
@@ -29,24 +32,63 @@ struct AddBookView: View {
                     }
                 }
 
-                Picker("Reading Status", selection: $viewModel.selectedReadingStatus) {
-                    ForEach(ReadingStatus.allCases, id: \.self) { status in
-                        Text(status.rawValue).tag(status)
-                    }
-                }
-
                 List(viewModel.googleBooksService.books, id: \.id) { book in
                     Button(action: {
-                        viewModel.addBookToLibrary(book)
+                        selectedBook = book
+                        selectedReadingStatus = book.readingStatus
+                        showReadingStatusPicker = true
                     }) {
-                        Text(book.title)
+                        HStack {
+                            Text(book.title)
+                            Text(book.author?.name ?? "Unknown Author")
+                            Spacer()
+                            Image(systemName: "plus.circle")
+                                .foregroundColor(.blue)
+                        }
                     }
                 }
             }
-            .navigationTitle("Add Book")
+            .navigationTitle("Add Book test")
+// sheet modifier came from appel devloper website  https://developer.apple.com/documentation/swiftui/view/sheet(ispresented:ondismiss:content:)
+            .sheet(isPresented: $showReadingStatusPicker) {
+                VStack {
+                    Text("Choose Reading Status")
+                        .font(.headline)
+                        .padding()
+// chat gave me the 3 lines of code https://chatgpt.com/share/67cc91a8-9c44-8010-81c4-9c1fe10ad4a1
+                    Picker("Reading Status", selection: $selectedReadingStatus) {
+                        ForEach(ReadingStatus.allCases, id: \.self) { status in
+                            Text(status.rawValue).tag(status)
+                        }
+                    }
+                    .pickerStyle(SegmentedPickerStyle())
+                    .padding()
+
+                    Button("Add to Library") {
+                        guard let book = selectedBook else { return }
+                        
+                        let newBook = Book(
+                            title: book.title,
+                            author: book.author,
+                            genre: book.genre,
+                            publicationYear: book.publicationYear,
+                            coverURL: book.coverURL,
+                            readingStatus: selectedReadingStatus
+                        )
+
+                        viewModel.addBookToLibrary(newBook)
+                        showReadingStatusPicker = false
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .padding()
+                }
+                    .padding()
+                }
+            }
         }
     }
-}
+
+
 
 #Preview {
     let sharedModelContainer: ModelContainer = {
