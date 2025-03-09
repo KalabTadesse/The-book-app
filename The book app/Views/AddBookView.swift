@@ -48,7 +48,7 @@ struct AddBookView: View {
                     }
                 }
             }
-            .navigationTitle("Add Book test")
+            .navigationTitle("Add Book")
 // sheet modifier came from appel devloper website  https://developer.apple.com/documentation/swiftui/view/sheet(ispresented:ondismiss:content:)
             .sheet(isPresented: $showReadingStatusPicker) {
                 VStack {
